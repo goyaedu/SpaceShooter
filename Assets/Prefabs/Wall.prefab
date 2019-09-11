@@ -91,6 +91,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b33476d78e1bc6e488b226e7225f214c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sparkEffect: {fileID: 1000010355441670, guid: 02a509a7fa70ed740ba4197e20c5d32d,
+    type: 3}
 --- !u!65 &999587903767201177
 BoxCollider:
   m_ObjectHideFlags: 0
