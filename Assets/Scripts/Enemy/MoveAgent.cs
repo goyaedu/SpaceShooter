@@ -12,8 +12,50 @@ public class MoveAgent : MonoBehaviour
     // 다음 순찰 지점의 배열의 Index
     public int nextIdx;
 
+    private readonly float patrolSpeed = 1.5f;
+    private readonly float traceSpeed = 4.0f;
+
     // NavMeshAgent 컴포넌트를 저장할 변수
     private NavMeshAgent agent;
+
+    // 순찰 여부를 판단하는 변수
+    private bool _patrolling;
+    
+    // patrolling 프로퍼티 정의 (getter, setter)
+    public bool patrolling
+    {
+        get { return _patrolling; }
+        set
+        {
+            _patrolling = value;
+            if (_patrolling)
+            {
+                agent.speed = patrolSpeed;
+                MoveWayPoint();
+            }
+        }
+    }
+
+    // 추적 대상의 위치를 저장하는 변수
+    private Vector3 _traceTarget;
+    
+    // traceTarget 프로퍼티 정의(getter, setter)
+    public Vector3 traceTarget
+    {
+        get { return _traceTarget; }
+        set
+        {
+            _traceTarget = value;
+            agent.speed = traceSpeed;
+            TraceTarget(_traceTarget);
+        }
+    }
+
+    // NavMeshAgent의 이동 속도에 대한 프로퍼티 정의(getter)
+    public float speed
+    {
+        get { return agent.velocity.magnitude; }
+    }
 
     private void Start()
     {
@@ -21,6 +63,8 @@ public class MoveAgent : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         // 목적지에 가까워질수록 속도를 줄이는 옵션을 비활성화
         agent.autoBraking = false;
+
+        agent.speed = patrolSpeed;
 
         // 하이러키 뷰의 WayPointGroup 게임오브젝트를 추출
         var group = GameObject.Find("Waypoint");
@@ -48,8 +92,30 @@ public class MoveAgent : MonoBehaviour
         agent.isStopped = false;
     }
 
+    // 주인공을 추적할 때 이동시키는 함수
+    void TraceTarget(Vector3 pos)
+    {
+        if (agent.isPathStale) return;
+
+        agent.destination = pos;
+        agent.isStopped = false;
+    }
+
+    // 순찰 및 추적을 정지시키는 함수
+    public void Stop()
+    {
+        agent.isStopped = true;
+
+        // 바로 정지하기 위해 속도를 0으로 설정
+        agent.velocity = Vector3.zero;
+        _patrolling = false;
+    }
+
     private void Update()
     {
+        // 순찰 모드가 아닐 경우 로직을 수행하지 않음
+        if (!_patrolling) return;
+
         // NavMeshAgent가 이동하고 있고 목적지에 도착했는지 여부를 계산
         if (agent.velocity.sqrMagnitude >= 0.2f * 0.2f && agent.remainingDistance <= 0.5f)
         {
