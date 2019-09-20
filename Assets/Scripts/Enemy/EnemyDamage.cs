@@ -46,7 +46,7 @@ public class EnemyDamage : MonoBehaviour
 
         // 혈흔 효과 생성
         GameObject blood = Instantiate<GameObject>(bloodEffect, pos, rot);
-        Destroy(blood, 1.0f);
+        Destroy(blood,1.0f);
     }
     void Update()
     {
