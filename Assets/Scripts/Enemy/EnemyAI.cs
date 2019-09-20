@@ -39,6 +39,9 @@ public class EnemyAI : MonoBehaviour
     // 이동을 제어하는 MoveAgent 클래스를 저장할 변수
     private MoveAgent moveAgent;
 
+    // 총알 발사를 제어하는 EnemyFire 클래스를 저장할 변수
+    private EnemyFire enemyFire;
+
     // 애니메이터 컨트롤러에 정의한 파라미터의 해시값을 미치 추출
     private readonly int hashMove = Animator.StringToHash("IsMove");
     private readonly int hashSpeed = Animator.StringToHash("Speed");
@@ -59,6 +62,9 @@ public class EnemyAI : MonoBehaviour
 
         // 이동을 제어하는 MoveAgent 클래스를 추출
         moveAgent = GetComponent<MoveAgent>();
+
+        // 총알 발사를 제어하는 EnemyFire 클래스를 추출
+        enemyFire = GetComponent<EnemyFire>();
 
         // 코루틴의 지연시간 생성
         ws = new WaitForSeconds(0.3f);
@@ -114,11 +120,15 @@ public class EnemyAI : MonoBehaviour
             switch (state)
             {
                 case State.PATROL:
+                    // 총알 발사 정지
+                    enemyFire.isFire = false;
                     // 순찰 모드 활성화
                     moveAgent.patrolling = true;
                     animator.SetBool(hashMove, true);
                     break;
                 case State.TRACE:
+                    // 총알 발사 정지
+                    enemyFire.isFire = false;
                     // 주인공의 위치를 넘겨 추적 모드로 변경
                     moveAgent.traceTarget = playerTr.position;
                     animator.SetBool(hashMove, true);
@@ -127,6 +137,10 @@ public class EnemyAI : MonoBehaviour
                     // 순찰 및 추적을 정지
                     moveAgent.Stop();
                     animator.SetBool(hashMove, false);
+
+                    // 총알 발사 시작
+                    if (enemyFire.isFire == false)
+                        enemyFire.isFire = true;
                     break;
                 case State.DIE:
                     // 순찰 및 추적을 정지
