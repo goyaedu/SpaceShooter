@@ -3941,6 +3941,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1354424231}
   - component: {fileID: 1354424230}
+  - component: {fileID: 1354424232}
   m_Layer: 0
   m_Name: CameraRig
   m_TagString: Untagged
@@ -3981,6 +3982,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1354424232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354424229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aafe57a95447d247b385354358b81c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shakeCamera: {fileID: 534669905}
+  shakeRotate: 0
 --- !u!4 &1368247798 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2451967506443313228, guid: d05e3ca919a9bd54185a6b32994e6eb4,
