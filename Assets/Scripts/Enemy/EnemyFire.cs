@@ -67,7 +67,6 @@ public class EnemyFire : MonoBehaviour
                 Fire();
                 // 다음 발사 시간 계산
                 nextFire = Time.time + fireRate + Random.Range(0.0f, 0.3f);
-                Debug.Log("nextFire = " + nextFire);
             }
 
             // 주인공이 있는 위치까지의 회전 각도 계산
