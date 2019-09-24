@@ -86,6 +86,13 @@ public class EnemyAI : MonoBehaviour
         StartCoroutine(CheckState());
         // Action 코루틴 함수 실행
         StartCoroutine(Action());
+
+        Damage.OnPlayerDie += this.OnPlayerDie;
+    }
+
+    private void OnDisable()
+    {
+        Damage.OnPlayerDie -= this.OnPlayerDie;
     }
 
     // 적 캐릭터의 상태를 검사하는 코루틴 함수
