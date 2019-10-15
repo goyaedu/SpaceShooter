@@ -66,6 +66,10 @@ public class MenuCtrl : MonoBehaviour
             currentTime += Time.deltaTime;
             yield return null;
         }
-        callback.Invoke();
+
+        //if (callback != null)
+        //    callback.Invoke();
+
+        callback?.Invoke();
     }
 }
