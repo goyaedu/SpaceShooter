@@ -270,6 +270,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf26a1115c09156489b3b3c5e38ac10e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hpBarPrefab: {fileID: 8017414497216169394, guid: 293b79f4b50a6aa4582ad392428848a5,
+    type: 3}
+  hpBarOffset: {x: 0, y: 2.2, z: 0}
 --- !u!1 &3726985415233908070
 GameObject:
   m_ObjectHideFlags: 0

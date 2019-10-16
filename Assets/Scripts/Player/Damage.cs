@@ -46,7 +46,6 @@ public class Damage : MonoBehaviour
             StartCoroutine(ShowBloodScreen());
 
             currHp -= 5.0f;
-            Debug.Log("Player HP = " + currHp.ToString());
 
             // 생명 게이지의 색상 및 크기 변경 함수를 호출
             DisplayHpbar();

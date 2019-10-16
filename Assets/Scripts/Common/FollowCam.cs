@@ -18,6 +18,8 @@ public class FollowCam : MonoBehaviour
     {
         // CameraRig의 Transform 컴포넌트 추출
         tr = GetComponent<Transform>();
+
+        
     }
 
     // 주인공 캐릭터의 이동 로직이 완료된 후 처리하기 위해 LateUpdate에서 구현
